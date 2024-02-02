@@ -1,3 +1,4 @@
 <?php
+require_once __DIR__ . '/bootstrap.php';
 
-echo 111;
+var_dump($_ENV);
