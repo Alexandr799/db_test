@@ -2,9 +2,15 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entities\Position;
 
-class PositionRepository extends EntityRepository
+class PositionRepository extends BaseRepository
 {
-
+    public function createEntity(array $item)
+    {
+        $position = new Position();
+        $position->setTitle($item['title'])
+            ->setWage($item['wage']);
+        return $position;
+    }
 }

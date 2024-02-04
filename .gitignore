@@ -3,3 +3,4 @@ vscode
 .env
 vendor
 app/vendor/
+data/*
