@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Repository\TaskRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -15,9 +16,17 @@ class Task
     #[ORM\Column(type: 'integer', options: ["unsigned" => true])]
     #[ORM\GeneratedValue]
     private int|null $id = null;
-    
+
     #[ORM\Column(type: 'string', length: 255, name: 'title', nullable: false)]
     private string $title;
+
+    // #[ORM\ManyToMany(targetEntity: Employer::class, mappedBy: 'employers')]
+    // private ArrayCollection $employers;
+
+    // public function __construct()
+    // {
+    //     $this->employers = new ArrayCollection();
+    // }
 
     public function getId()
     {

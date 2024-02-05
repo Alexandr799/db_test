@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Repository\PositionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -24,7 +25,7 @@ class Position
     private int $wage;
 
     #[ORM\OneToMany(mappedBy: 'position', targetEntity: Employer::class)]
-    private ArrayCollection $emploees;
+    private Collection $emploees;
 
 
     public function __construct()

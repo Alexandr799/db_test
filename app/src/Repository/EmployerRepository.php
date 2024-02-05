@@ -10,7 +10,7 @@ class EmployerRepository extends BaseRepository
     public function createEntity(array $item)
     {
         $employer = new Employer();
-        $employer->setName($item['title'])
+        $employer->setName($item['name'])
             ->setPosition($item['position']);
         return $employer;
     }

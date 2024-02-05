@@ -3,6 +3,8 @@
 namespace App\Entities;
 
 use App\Repository\EmployerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -21,6 +23,17 @@ class Employer
     #[ORM\ManyToOne(targetEntity: Position::class, inversedBy: 'emploees')]
     #[ORM\JoinColumn(nullable: false, name: 'position_id', referencedColumnName: 'id')]
     private $position;
+
+    #[ORM\JoinTable(name: 'timesheets')]
+    #[ORM\JoinColumn(name: 'employer_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'task_id', referencedColumnName: 'id', unique: true)]
+    #[ORM\ManyToMany(targetEntity: Task::class)]
+    private Collection $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
 
 
     public function getId()

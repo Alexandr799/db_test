@@ -17,5 +17,13 @@ abstract class BaseRepository extends EntityRepository
         $em->flush();
     }
 
+    public function saveOne(array $item)
+    {
+        $em = $this->getEntityManager();
+        $entity = $this->createEntity($item);
+        $em->persist($entity);
+        $em->flush();
+    }
+
     abstract public function createEntity(array $item);
 }
