@@ -17,7 +17,7 @@ class Task
     #[ORM\GeneratedValue]
     private int|null $id = null;
 
-    #[ORM\Column(type: 'string', length: 255, name: 'title', nullable: false)]
+    #[ORM\Column(type: 'string', length: 255, name: 'title', nullable: false, unique: true)]
     private string $title;
 
     // #[ORM\ManyToMany(targetEntity: Employer::class, mappedBy: 'employers')]
