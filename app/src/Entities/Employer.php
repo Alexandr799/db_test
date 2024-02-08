@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
-#[ORM\Table(name: 'employers')]
+#[ORM\Table(name: 'employees')]
 #[ORM\Entity(repositoryClass: EmployerRepository::class)]
 class Employer
 {

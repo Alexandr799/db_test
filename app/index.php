@@ -1,4 +1,6 @@
 <?php
+use App\Entities\Position;
+
 require_once __DIR__ . '/bootstrap.php';
 
 $command = $argv[1];
@@ -10,10 +12,11 @@ if ($command === 'import') {
             require_once(__DIR__ . '/src/Scripts/positions_import.php');
             break;
         case 'employees.csv':
+            require_once(__DIR__ . '/src/Scripts/employees_import.php');
             break;
     }
 }
 
 
 
-var_dump($argv);
+// var_dump($argv);
