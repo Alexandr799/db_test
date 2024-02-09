@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entities\Position;
 use Doctrine\ORM\EntityRepository;
+use \Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 abstract class BaseRepository extends EntityRepository
 {
@@ -32,6 +32,21 @@ abstract class BaseRepository extends EntityRepository
             return true;
         } catch (\Throwable $e) {
             return false;
+        }
+    }
+
+    public function createOrSelect(array $item, array $select)
+    {
+        $em = $this->getEntityManager();
+        $entity = $this->createEntity($item);
+        try {
+            $em->persist($entity);
+            $em->flush();
+            return $entity;
+
+        } catch (UniqueConstraintViolationException $e) {
+            $entity = $this->findOneBy($select);
+            return $entity;
         }
     }
 

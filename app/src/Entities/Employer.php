@@ -20,19 +20,16 @@ class Employer
     #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private string $name;
 
-    #[ORM\ManyToOne(targetEntity: Position::class, inversedBy: 'emploees')]
+    #[ORM\ManyToOne(targetEntity: Position::class, inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false, name: 'position_id', referencedColumnName: 'id')]
     private $position;
 
-    #[ORM\JoinTable(name: 'timesheets')]
-    #[ORM\JoinColumn(name: 'employer_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'task_id', referencedColumnName: 'id', unique: true)]
-    #[ORM\ManyToMany(targetEntity: Task::class)]
-    private Collection $tasks;
+    #[ORM\OneToMany(targetEntity: TimeSheet::class, mappedBy: 'employer')]
+    private Collection $timesheests;
 
     public function __construct()
     {
-        $this->tasks = new ArrayCollection();
+        $this->timesheests= new ArrayCollection();
     }
 
 

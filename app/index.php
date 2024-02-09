@@ -14,6 +14,9 @@ if ($command === 'import') {
         case 'employees.csv':
             require_once(__DIR__ . '/src/Scripts/employees_import.php');
             break;
+        case 'timesheet.csv':
+            require_once(__DIR__ . '/src/Scripts/timesheets_import.php');
+            break;
     }
 }
 

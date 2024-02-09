@@ -3,13 +3,13 @@
 namespace App\Entities;
 
 use App\Repository\TaskRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 #[ORM\Table(name: 'tasks')]
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
-
 class Task
 {
     #[ORM\Id]
@@ -20,13 +20,13 @@ class Task
     #[ORM\Column(type: 'string', length: 255, name: 'title', nullable: false, unique: true)]
     private string $title;
 
-    // #[ORM\ManyToMany(targetEntity: Employer::class, mappedBy: 'employers')]
-    // private ArrayCollection $employers;
+    #[ORM\OneToMany(targetEntity: TimeSheet::class, mappedBy: 'task')]
+    private Collection $timesheests;
 
-    // public function __construct()
-    // {
-    //     $this->employers = new ArrayCollection();
-    // }
+    public function __construct()
+    {
+        $this->timesheests = new ArrayCollection();
+    }
 
     public function getId()
     {
