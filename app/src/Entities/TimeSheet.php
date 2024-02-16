@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TimeSheetsRepository;
 
 
 #[ORM\Table(name: 'timesheets')]
@@ -19,7 +20,7 @@ class TimeSheet
     private Employer $employer;
 
     #[ORM\ManyToOne(targetEntity: Task::class, inversedBy: 'employees')]
-    #[ORM\JoinColumn(nullable: false, name: 'employer_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(nullable: false, name: 'task_id', referencedColumnName: 'id')]
     private Task $task;
 
     #[ORM\Column(type: 'datetime', nullable: false)]

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entities\Employer;
 use App\Entities\Task;
 use App\Entities\TimeSheet;
+use App\Services\Logger;
 
 class TimeSheetsRepository extends BaseRepository
 {
@@ -22,9 +23,10 @@ class TimeSheetsRepository extends BaseRepository
 
     public function createTimeSheetsWithTaskWithEmployerName(array $data): bool
     {
-        $em = $this->getEntityManager();
-        $employerRepository = new EmployerRepository($em, $em->getClassMetadata(Employer::class));
-        $taskRepositiry = new TaskRepository($em, $em->getClassMetadata(Task::class));
+        $em = $this->getOpenEntityManager();
+        $employerRepository = $em->getRepository(Employer::class);
+        $taskRepositiry = $em->getRepository(Task::class);
+
         $em->beginTransaction();
         try {
             $employer = $employerRepository->findOneBy(['name' => $data['username']]);
@@ -32,20 +34,27 @@ class TimeSheetsRepository extends BaseRepository
                 throw new \Exception("Пользователя для задачи не найдено!");
             }
 
-            $task = $taskRepositiry->createOrSelect(['title' => $data['task_title']]);
+            $selectTask = ['title' => $data['task_title']];
+            $task = $taskRepositiry->findOneBy($selectTask);
+            if (empty($task)) {
+                $task = $taskRepositiry->createEntity($selectTask);
+            }
+            $em->persist($task);
 
             $timesheet = $this->createEntity([
                 'employer' => $employer,
                 'task' => $task,
-                'date_start' => $data['date_start'],
-                'date_end' => $data['date_end']
+                'date_start' => new \DateTime($data['date_start']),
+                'date_end' => new \DateTime($data['date_end'])
             ]);
+
             $em->persist($timesheet);
             $em->flush();
             $em->commit();
             return true;
         } catch (\Throwable $e) {
             $em->rollback();
+            Logger::logError($e->getMessage());
             return false;
         }
     }

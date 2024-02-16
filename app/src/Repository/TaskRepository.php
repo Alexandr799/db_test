@@ -14,24 +14,4 @@ class TaskRepository extends BaseRepository
         $task->setTitle($item['title']);
         return $task;
     }
-
-    public function createOrSelect($item)
-    {
-        $title = $item['title'];
-        $em = $this->getEntityManager();
-
-        $task = $this->createEntity([
-            'title' => $title
-        ]);
-        try {
-            $em->persist($task);
-            $em->flush();
-
-        } catch (UniqueConstraintViolationException $e) {
-            $task = $this->findOneBy(['title' => $title]);
-            return $task;
-        }
-
-        return $task;
-    }
 }

@@ -12,7 +12,7 @@ use Symfony\Component\Cache\Adapter\RedisAdapter;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$paths = [__DIR__ . '/src/Entities/', __DIR__ . '/src/Repositories/'];
+$paths = [__DIR__ . '/src/Entities/', __DIR__ . '/src/Repository/'];
 $isDevMode = false;
 $reportFieldsWhereDeclared = false;
 

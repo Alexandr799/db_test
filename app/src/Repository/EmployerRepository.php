@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entities\Employer;
 use App\Entities\Position;
+use App\Services\Logger;
 
 class EmployerRepository extends BaseRepository
 {
@@ -17,7 +18,7 @@ class EmployerRepository extends BaseRepository
 
     public function createEmployerByNameAndPositionName(string $name, string $positionTitle): bool
     {
-        $em = $this->getEntityManager();
+        $em = $this->getOpenEntityManager();
         $positionRepository = new PositionRepository($em, $em->getClassMetadata(Position::class));
         $em->beginTransaction();
         try {
@@ -30,6 +31,7 @@ class EmployerRepository extends BaseRepository
             return true;
         } catch (\Throwable $e) {
             $em->rollback();
+            Logger::logError($e->getMessage());
             return false;
         }
     }
