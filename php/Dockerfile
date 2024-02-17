@@ -12,4 +12,8 @@ RUN useradd -ms /bin/bash myuser
 
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
+RUN chmod 755 -R /var/www
+
+RUN chown -R myuser:myuser /var/www
+
 USER myuser

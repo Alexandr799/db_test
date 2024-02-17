@@ -1,11 +1,20 @@
 <?php
-use App\Entities\TimeSheet;
 
+use App\Entities\TimeSheet;
 
 $timesheetRepository = $entityManager
     ->getRepository(TimeSheet::class);
 
-var_dump($name);
-$res = $timesheetRepository->getTimesheetsByEmployerName($name);  
+$res = $timesheetRepository->getTimesheetsByEmployerName($name);
 
-var_dump($res);
+if (!count($res)) {
+    echo 'Таймшитов не найдено!' . "\n";
+} else {
+    $a = 123;
+    $table = new Console_Table();
+    $table->setHeaders(array_keys($res[0]));
+    foreach($res as $row) {
+        $table->addRow(array_values($row));
+    }
+    echo $table->getTable();
+}
