@@ -64,7 +64,7 @@ class TimeSheetsRepository extends BaseRepository
     {
         $connection = $this->getEntityManager()->getConnection();
         $data = $connection->createQueryBuilder()
-            ->select('t.id', 't.task_id','e.name', 't.date_start', 't.date_end')
+            ->select('t.id', 't.task_id','e.name as employer_name ', 't.date_start', 't.date_end')
             ->from('timesheets', 't')
             ->join('t', 'employees', 'e', 'e.id = t.employer_id')
             ->where('e.name = :name')
