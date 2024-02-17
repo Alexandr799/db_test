@@ -58,4 +58,20 @@ class TimeSheetsRepository extends BaseRepository
             return false;
         }
     }
+
+
+    public function getTimesheetsByEmployerName(string $name)
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $data = $connection->createQueryBuilder()
+            ->select('t.id', 't.task_id','e.name', 't.date_start', 't.date_end')
+            ->from('timesheets', 't')
+            ->join('t', 'employees', 'e', 'e.id = t.employer_id')
+            ->where('e.name = :name')
+            ->setParameter('name', $name)
+            ->execute()
+            ->fetchAll();
+
+        return $data;
+    }
 }

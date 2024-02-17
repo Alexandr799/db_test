@@ -20,6 +20,11 @@ if ($command === 'import') {
     }
 }
 
+if ($command === 'get') {
+    $name = $argument;
+    require_once(__DIR__ . '/src/Scripts/timesheet_get.php');
+}
+
 
 
 // var_dump($argv);
