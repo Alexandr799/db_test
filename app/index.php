@@ -21,6 +21,8 @@ if ($command === 'import') {
 } else if ($command === 'get') {
     $name = $argument;
     require_once(__DIR__ . '/src/Scripts/oltp/timesheet_get.php');
+} else if ($command === 'list') {
+    require_once(__DIR__ . '/src/Scripts/oltp/employers_list.php');
 } else if ($command === 'remove') {
     $id = $argument;
     require_once(__DIR__ . '/src/Scripts/oltp/timesheet_remove.php');
