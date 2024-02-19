@@ -25,6 +25,12 @@ if ($command === 'get') {
     require_once(__DIR__ . '/src/Scripts/timesheet_get.php');
 }
 
+if ($command === 'remove') {
+    $id = $argument;
+    require_once(__DIR__ . '/src/Scripts/timesheet_remove.php');
+}
+
+
 
 
 // var_dump($argv);
