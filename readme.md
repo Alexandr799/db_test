@@ -29,3 +29,6 @@
 6) Перенести данные из дампа базы ``` docker exec -i mysql mysql -uroot -p`ВСТАВЬТЕ ВАШ ПАРОЛЬ от БАЗЫ ДАННЫХ!` employers_db < schema.sql ```
 7) Ввести команду ``` docker exec -i php php  bin/console orm:generate-proxies ``` для генерации прокси для орм (работа в прод среде)
 
+
+Данные для импорта в csv  должны лежать тут app/csv (они уже там есть)
+
