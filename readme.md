@@ -21,12 +21,11 @@
 и вызывать команды отттуда или перед командой использовать префикс docker exec -i php (например ``` docker exec -i php php index.php  Top5employees ``` )
 
 ## Для запуска приложения вам нужно иметь установленный docker и docker-compose
-
-1) Собрать контейнеры командой ``` docker-compose up -d --build ```
-2) Установить зависимости для php приложения ``` docker exec php composer install ```
-3) Создать базу данных ``` docker exec -i mysql mysql -uroot -p`ВСТАВЬТЕ ВАШ ПАРОЛЬ от БАЗЫ ДАННЫХ!` -e 'CREATE DATABASE employers_db' ``` 
-4) Перенести данные из дампа базы ``` docker exec -i mysql mysql -uroot -p`ВСТАВЬТЕ ВАШ ПАРОЛЬ от БАЗЫ ДАННЫХ!` employers_db < schema.sql ```
-5) Ввести команду ``` docker exec -i php php  bin/console orm:generate-proxies ``` для генерации прокси для орм (работа в прод среде)
-6) Создайте файл .env в ./app (пример файла в .env-example)
-7) Пароль для базы даных нужно будет указать также в .env файле (создайте его в корне проекта для докер композа)
+1) Создайте файл .env в ./app (пример файла в .env-example)
+2) Пароль для базы даных нужно будет указать также в .env файле (создайте его в корне проекта для докер композа)
+3) Собрать контейнеры командой ``` docker-compose up -d --build ```
+4) Установить зависимости для php приложения ``` docker exec php composer install ```
+5) Создать базу данных ``` docker exec -i mysql mysql -uroot -p`ВСТАВЬТЕ ВАШ ПАРОЛЬ от БАЗЫ ДАННЫХ!` -e 'CREATE DATABASE employers_db' ``` 
+6) Перенести данные из дампа базы ``` docker exec -i mysql mysql -uroot -p`ВСТАВЬТЕ ВАШ ПАРОЛЬ от БАЗЫ ДАННЫХ!` employers_db < schema.sql ```
+7) Ввести команду ``` docker exec -i php php  bin/console orm:generate-proxies ``` для генерации прокси для орм (работа в прод среде)
 
