@@ -1,4 +1,4 @@
-*.log
+app/logs/*
 vscode
 .env
 vendor

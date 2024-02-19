@@ -3,7 +3,7 @@ use App\Entities\Employer;
 use App\Entities\Position;
 
 
-$filePath = __DIR__ . '/../../csv/employees.csv';
+$filePath = __DIR__ . '/../../../csv/employees.csv';
 
 $file = @fopen($filePath, 'r');
 $importedCount = 0;
