@@ -2,7 +2,7 @@
 use App\Entities\Position;
 
 
-$filePath = __DIR__ . '/../../csv/positions.csv';
+$filePath = __DIR__ . '/../../../csv/positions.csv';
 
 $file = @fopen($filePath, 'r');
 $importedCount = 0;
