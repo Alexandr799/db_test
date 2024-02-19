@@ -8,7 +8,7 @@ $entityManager->beginTransaction();
 try {
     $connection = $entityManager->getConnection();
 
-    $sql = "SELECT * FROM timesheets WHERE task_id = :id";
+    $sql = "SELECT * FROM timesheets WHERE id = :id";
     $statement = $connection->prepare($sql);
     $statement->bindParam('id', $id);
     $timesheet = $statement->execute()->fetchAll();
@@ -18,7 +18,7 @@ try {
         throw new Exception('Запись для удаление не найдена!');
     }
 
-    $sql = "DELETE FROM timesheets WHERE task_id = :id";
+    $sql = "DELETE FROM timesheets WHERE id = :id";
     $statement = $connection->prepare($sql);
     $statement->bindParam('id', $id);
     $timesheet = $statement->execute();
@@ -27,6 +27,6 @@ try {
     echo "Timesheet id $id removed" . "\n";
 } catch (\Throwable $e) {
     $entityManager->rollback();
-    echo 'Error! See info in log files!' . "\n";
+    echo 'Error! See more info in log files!' . $e->getMessage() . "\n";
     Logger::logError($e->getMessage());
 }
