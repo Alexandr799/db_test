@@ -68,6 +68,7 @@ class TimeSheetsRepository extends BaseRepository
             ->from('timesheets', 't')
             ->join('t', 'employees', 'e', 'e.id = t.employer_id')
             ->where('e.name = :name')
+            ->orderBy('t.date_start', 'asc')
             ->setParameter('name', $name)
             ->execute()
             ->fetchAll();
